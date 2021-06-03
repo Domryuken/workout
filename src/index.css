@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.exercise-box {
+  border-width: 3px;
+  border-color: black;
+  border-style: solid;
+  padding: 20px;
+  margin: 20px;
+}
+
+.exercise-box-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.workout-box {
+  border-width: 5px;
+  border-style: solid;
+  border-color: black;
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.workout-box-inner {
+  padding: 0 20px 20px 20px;
+}
+
+
+.workout-tab-box {
+  padding: 0 20px 20px 20px;
+}
+
+.workout-tab-box-inner {
+  display: flex;
+  flex-direction: column;
+}
