@@ -44,7 +44,6 @@ p {
   padding: 0 20px 20px 20px;
 }
 
-
 .workout-tab-box {
   padding: 0 20px 20px 20px;
 }
@@ -52,4 +51,9 @@ p {
 .workout-tab-box-inner {
   display: flex;
   flex-direction: column;
+}
+
+.add-workout-button {
+  width: 50px;
+  height: 20px;
 }
