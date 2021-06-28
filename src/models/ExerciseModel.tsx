@@ -1,8 +1,8 @@
 import SetModel, {exampleSet1, exampleSet2, exampleSet3} from "./SetModel"
 
 export default interface ExerciseModel {
-  name: string,
-  sets?: SetModel[]
+  readonly name: string,
+  readonly sets?: SetModel[]
 }
 
 export const exampleExercise1: ExerciseModel = {

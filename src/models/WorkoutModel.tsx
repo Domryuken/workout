@@ -2,10 +2,9 @@ import ExerciseModel from "./ExerciseModel"
 import {exampleExercise1, exampleExercise2, exampleExercise3, exampleExercise4} from "./ExerciseModel"
 
 export default interface WorkoutModel {
-  exercises: ExerciseModel[],
-  date: string,
-  time: string,
-  duration: number
+  readonly exercises: ExerciseModel[],
+  readonly startTime: Date,
+  readonly endTime: Date
 }
 
 export const workoutExample: WorkoutModel = {
@@ -15,7 +14,6 @@ export const workoutExample: WorkoutModel = {
     exampleExercise3,
     exampleExercise4,
   ],
-  date:"10 2 2021",
-  time:"8:30",
-  duration: 2
+  startTime: new Date(),
+  endTime: new Date()
 }

@@ -1,7 +1,7 @@
 
 export default interface SetModel {
-  weight: number,
-  reps: number
+  readonly weight: number,
+  readonly reps: number
 }
 
 export const exampleSet1: SetModel = {

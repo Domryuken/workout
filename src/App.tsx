@@ -2,20 +2,17 @@ import React, {useEffect, useState} from 'react';
 import WorkoutsController from "./controllers/WorkoutsController"
 import AddWorkoutController from "./controllers/AddWorkoutController"
 import {Route} from "react-router-dom"
+import WorkoutModel from './models/WorkoutModel';
+import { getWorkouts } from "./Connector"
 
 function App() {
 
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState<WorkoutModel[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/workouts")
-      .then(res => {return res.json()})
-      .then(data => {
-        console.log(data);
-        setWorkouts(data);
-      })
+    getWorkouts(setWorkouts)
   }, [])
-
+  
   return (
     <div className="App">
       <Route exact path="/"><WorkoutsController workouts={workouts} /></Route>
