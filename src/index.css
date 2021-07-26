@@ -57,3 +57,14 @@ p {
   width: 50px;
   height: 20px;
 }
+
+.delete-button {
+  height: 20px;
+  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.delete-button:hover {
+  border-color: red; 
+}

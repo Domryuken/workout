@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {WorkoutsView} from "../views/workoutsPage/WorkoutsView"
 import WorkoutModel, {workoutExample} from "../models/WorkoutModel"
-import {Route} from "react-router-dom"
+import {Dispatch, SetStateAction} from 'react';
 
-export const WorkoutsController: React.FC<{workouts: WorkoutModel[]}> = (workouts) => {
+export const WorkoutsController: React.FC<{setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>, workouts: WorkoutModel[]}> = ({
+  setWorkouts,
+  workouts
+}) => {
 
   const [modalIsOpen, setIsOpen] = React.useState<boolean>(true);
 
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true);
   }
 
-  function closeModal() {
+  const closeModal = () => {
     setIsOpen(false);
   }
 
   return (
-    <WorkoutsView {...workouts} modalIsOpen={modalIsOpen} openModal={openModal} closeModal={closeModal}/>
+    <WorkoutsView
+      workouts={workouts}
+      modalIsOpen={modalIsOpen}
+      openModal={openModal}
+      closeModal={closeModal}
+    />
   );
 }
 

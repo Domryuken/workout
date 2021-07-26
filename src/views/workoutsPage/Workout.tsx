@@ -1,9 +1,10 @@
 import React from "react";
 import {ExerciseMin, ExerciseMax} from "./Exercise"
 import WorkoutModel from "../../models/WorkoutModel"
-
+import { deleteWorkout } from "../../Connector";
 
 export const Workout: React.FC<WorkoutModel> = ({
+  _id,
   startTime,
   endTime,
   exercises
@@ -13,6 +14,7 @@ export const Workout: React.FC<WorkoutModel> = ({
   const start = new Date(startTime)
   const end = new Date(endTime)
 
+  console.log(_id)
   return (
     <div className={"workout-box"}>
       <div className={"workout-box-inner"}>
@@ -23,6 +25,7 @@ export const Workout: React.FC<WorkoutModel> = ({
       {exercises.map( (exercise, idx) =>
         <ExerciseMax key={idx} {...exercise}/>
       )}
+      {_id? <a className="delete-button" onClick={() => deleteWorkout(_id)}>delete</a> : <a>not ready</a>}
     </div>
   )
 }

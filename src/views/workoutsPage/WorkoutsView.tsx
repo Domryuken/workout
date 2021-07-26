@@ -6,12 +6,20 @@ import {Workout} from "./Workout"
 import {Link} from "react-router-dom"
 import {addWorkout} from "../../Connector"
 
-export const WorkoutsView: React.FC<{workouts: WorkoutModel[], modalIsOpen: boolean, openModal: () => void, closeModal: () => void}> = ({
+interface Props {
+  workouts: WorkoutModel[],
+  modalIsOpen: boolean, 
+  openModal: () => void, 
+  closeModal: () => void
+}
+
+export const WorkoutsView: React.FC<Props> = ({
   workouts,
   modalIsOpen,
   openModal,
   closeModal
 }) => {
+  console.log(workouts)
   return (
 
     
@@ -21,12 +29,12 @@ export const WorkoutsView: React.FC<{workouts: WorkoutModel[], modalIsOpen: bool
         <Link to="/add-workout">
           <p>add</p>
         </Link>
-        <Modal
+        {/* <Modal
          isOpen={modalIsOpen}
          onRequestClose={closeModal}
-         contentLabel="Example Modal">
+         contentLabel="Example Modal"> */}
           <AddWorkoutView add={addWorkout}/>
-        </Modal>
+        {/* </Modal> */}
         {workouts.map( (workout, index) =>
           <Workout
             key={`workout-${index}`}

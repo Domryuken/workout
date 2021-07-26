@@ -6,9 +6,7 @@ import {addWorkout} from "../Connector"
 const AddWorkoutController = () => {
 
   return (
-    <div className="App">
-      <AddWorkoutView add={addWorkout} />
-    </div>
+    <AddWorkoutView add={addWorkout} />
   );
 }
 

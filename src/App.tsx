@@ -15,7 +15,7 @@ function App() {
   
   return (
     <div className="App">
-      <Route exact path="/"><WorkoutsController workouts={workouts} /></Route>
+      <Route exact path="/"><WorkoutsController setWorkouts={setWorkouts} workouts={workouts} /></Route>
       <Route exact path="/add-workout"><AddWorkoutController /></Route>
     </div>
   );
