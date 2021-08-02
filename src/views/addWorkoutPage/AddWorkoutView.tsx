@@ -2,7 +2,6 @@ import React from "react";
 // import {ExerciseMin, ExerciseMax} from "./Exercise"
 import WorkoutModel from "../../models/WorkoutModel"
 import { useForm } from "react-hook-form";
-import {exampleExercise1, exampleExercise2, exampleExercise3, exampleExercise4} from "../../models/ExerciseModel"
 
 interface FormValues {
   date: Date,
@@ -10,7 +9,11 @@ interface FormValues {
   end: string
 }
 
-export const AddWorkoutView: React.FC<{add: {(model: WorkoutModel): void}}> = ({add}) => {
+interface Props {
+  add: (model: WorkoutModel) => void
+}
+
+export const AddWorkoutView: React.FC<Props> = ({add}) => {
 
   const {
     register,
@@ -30,13 +33,10 @@ export const AddWorkoutView: React.FC<{add: {(model: WorkoutModel): void}}> = ({
           const endTime = new Date(`${justDate}T${end}:00`)
 
           const workout: WorkoutModel = {
+            username: "domryuken",
             startTime: startTime,
             endTime: endTime,
             exercises: [          
-              exampleExercise1,
-              exampleExercise2,
-              exampleExercise3,
-              exampleExercise4
             ]
           }
 
