@@ -7,7 +7,7 @@ const AddWorkoutController = () => {
 
   return (
     <div className="App">
-      <AddWorkoutView add={addWorkout} />
+      <AddWorkoutView addToMongo={addWorkout} />
     </div>
   );
 }

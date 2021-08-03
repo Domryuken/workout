@@ -15,6 +15,7 @@ export const Workout: React.FC<Props> = ({
   //TODO dirty work around until until I fix mongo storing dates as string for some reason
   const start = new Date(workout.startTime)
   const end = new Date(workout.endTime)
+
   return (
     <div className={"workout-box"}>
       <div className={"workout-box-inner"}>

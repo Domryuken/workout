@@ -9,9 +9,11 @@ function App() {
 
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([]);
 
-  useEffect(() => {
+  const refreshWorkouts = () => {
     getWorkouts(setWorkouts)
-  }, [])
+  }
+  
+  useEffect(refreshWorkouts, [])
   
   return (
     <div className="App">

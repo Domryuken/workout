@@ -3,7 +3,11 @@ import {WorkoutsView} from "../views/workoutsPage/WorkoutsView"
 import WorkoutModel  from "../models/WorkoutModel"
 import {Route} from "react-router-dom"
 
-export const WorkoutsController: React.FC<{workouts: WorkoutModel[]}> = (workouts) => {
+interface Props {
+  workouts: WorkoutModel[]
+}
+
+export const WorkoutsController: React.FC<Props> = ({workouts}) => {
 
   const [modalIsOpen, setIsOpen] = React.useState<boolean>(true);
 
@@ -16,7 +20,7 @@ export const WorkoutsController: React.FC<{workouts: WorkoutModel[]}> = (workout
   }
 
   return (
-    <WorkoutsView {...workouts} modalIsOpen={modalIsOpen} openModal={openModal} closeModal={closeModal}/>
+    <WorkoutsView workouts={workouts} modalIsOpen={modalIsOpen} openModal={openModal} closeModal={closeModal}/>
   );
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-// import {ExerciseMin, ExerciseMax} from "./Exercise"
 import WorkoutModel from "../../models/WorkoutModel"
 import { useForm } from "react-hook-form";
 
@@ -10,10 +9,12 @@ interface FormValues {
 }
 
 interface Props {
-  add: (model: WorkoutModel) => void
+  addToMongo: (model: WorkoutModel) => void,
 }
 
-export const AddWorkoutView: React.FC<Props> = ({add}) => {
+export const AddWorkoutView: React.FC<Props> = ({
+  addToMongo
+}) => {
 
   const {
     register,
@@ -36,12 +37,11 @@ export const AddWorkoutView: React.FC<Props> = ({add}) => {
             username: "domryuken",
             startTime: startTime,
             endTime: endTime,
-            exercises: [          
-            ]
+            exercises: []
           }
 
           console.log(workout)
-          add(workout);
+          addToMongo(workout);
         })}
       >
         <div className={"workout-box-inner"}>
