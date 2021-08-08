@@ -40,7 +40,6 @@ export const AddWorkoutView: React.FC<Props> = ({
             exercises: []
           }
 
-          console.log(workout)
           addToMongo(workout);
         })}
       >

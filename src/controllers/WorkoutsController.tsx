@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {WorkoutsView} from "../views/workoutsPage/WorkoutsView"
 import WorkoutModel  from "../models/WorkoutModel"
+import { deleteWorkout } from '../Connector';
 import {Route} from "react-router-dom"
 
 interface Props {
-  workouts: WorkoutModel[]
+  workouts: WorkoutModel[],
+  setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>
 }
 
-export const WorkoutsController: React.FC<Props> = ({workouts}) => {
+export const WorkoutsController: React.FC<Props> = ({workouts, setWorkouts}) => {
 
   const [modalIsOpen, setIsOpen] = React.useState<boolean>(true);
 
@@ -19,8 +21,12 @@ export const WorkoutsController: React.FC<Props> = ({workouts}) => {
     setIsOpen(false);
   }
 
+  const partialDelete = (model: WorkoutModel) => {
+    deleteWorkout(model, setWorkouts) 
+  }
+
   return (
-    <WorkoutsView workouts={workouts} modalIsOpen={modalIsOpen} openModal={openModal} closeModal={closeModal}/>
+    <WorkoutsView workouts={workouts} deleteWorkoutMongo={partialDelete} modalIsOpen={modalIsOpen} openModal={openModal} closeModal={closeModal}/>
   );
 }
 
