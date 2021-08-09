@@ -1,53 +1,25 @@
 import React from "react";
-import WorkoutModel from "../../models/WorkoutModel"
-import { useForm } from "react-hook-form";
-
-interface FormValues {
-  date: Date,
-  start: string,
-  end: string
-}
+import { UseFormRegisterReturn } from "react-hook-form";
 
 interface Props {
-  addToMongo: (model: WorkoutModel) => void,
+  date: UseFormRegisterReturn,
+  start: UseFormRegisterReturn,
+  end: UseFormRegisterReturn
 }
 
-export const AddWorkoutView: React.FC<Props> = ({addToMongo}) => {
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormValues>();
+export const AddWorkoutView: React.FC<Props> = (registers) => {
 
   return (
     <div >
       <h1>Add workout</h1>
 
-      <form
-        onSubmit={handleSubmit(({date, start, end}) => {
-          
-          const justDate = date.toISOString().split("T")[0]
-          const startTime = new Date(`${justDate}T${start}:00`)
-          const endTime = new Date(`${justDate}T${end}:00`)
-
-          const workout: WorkoutModel = {
-            username: "domryuken",
-            startTime: startTime,
-            endTime: endTime,
-            exercises: []
-          }
-
-          addToMongo(workout);
-        })}
-      >
         <div className={"workout-box-inner"}>
           
           <div>
             <h2>Date:</h2>
             <div>
               <label htmlFor="date">date</label>
-              <input type="date" {...register("date", {required: true, valueAsDate: true})} id="date"/>
+              <input type="date" {...registers.date} id="date"/>
             </div>
           </div>
 
@@ -55,7 +27,7 @@ export const AddWorkoutView: React.FC<Props> = ({addToMongo}) => {
             <h2>Start time:</h2>
             <div>
               <label htmlFor="start">time</label>
-              <input type="time" {...register("start", {required: true})} id="start"/>
+              <input type="time" {...registers.start} id="start"/>
             </div>
           </div>
 
@@ -63,14 +35,13 @@ export const AddWorkoutView: React.FC<Props> = ({addToMongo}) => {
             <h2>End time:</h2>
             <div>
               <label htmlFor="end">endTime</label>
-              <input type="time" {...register("end", {required: true})} id="end"/>
+              <input type="time" {...registers.end} id="end"/>
             </div>
           </div>
 
           <input type="submit"/>
           
         </div>
-      </form>
     </div>
   )
 }
