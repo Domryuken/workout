@@ -12,9 +12,7 @@ interface Props {
   addToMongo: (model: WorkoutModel) => void,
 }
 
-export const AddWorkoutView: React.FC<Props> = ({
-  addToMongo
-}) => {
+export const AddWorkoutView: React.FC<Props> = ({addToMongo}) => {
 
   const {
     register,
@@ -72,9 +70,6 @@ export const AddWorkoutView: React.FC<Props> = ({
           <input type="submit"/>
           
         </div>
-        {/* {workout.exercises.map( (exercise, idx) =>
-          <ExerciseMax key={idx} {...exercise}/>
-        )} */}
       </form>
     </div>
   )

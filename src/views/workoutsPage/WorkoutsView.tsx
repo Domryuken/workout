@@ -1,25 +1,16 @@
 import React from "react";
-import Modal from "react-modal";
 import WorkoutModel from "../../models/WorkoutModel"
-import AddWorkoutView from "../addWorkoutPage/AddWorkoutView"
 import {Workout} from "./Workout"
 import {Link} from "react-router-dom"
-import {deleteWorkout, addWorkout} from "../../Connector"
 
 interface Props {
   workouts: WorkoutModel[],
-  deleteWorkoutMongo: (model: WorkoutModel) => void,
-  modalIsOpen: boolean,
-  openModal: () => void,
-  closeModal: () => void
+  deleteWorkoutMongo: (model: WorkoutModel) => void
 }
 
 export const WorkoutsView: React.FC<Props> = ({
   workouts,
   deleteWorkoutMongo,
-  modalIsOpen,
-  openModal,
-  closeModal
 }) => {
   return (
 
@@ -29,9 +20,8 @@ export const WorkoutsView: React.FC<Props> = ({
         <Link to="/add-workout">
           <p>add</p>
         </Link>
-        {workouts.map( (workout, index) =>
+        {workouts.map( (workout) =>
           <Workout
-            key={`workout-${index}`}
             workout={workout}
             deleteWorkout={deleteWorkoutMongo}
           />
@@ -42,11 +32,3 @@ export const WorkoutsView: React.FC<Props> = ({
 }
 
 export default WorkoutsView
-
-
-        {/* <Modal
-         isOpen={modalIsOpen}
-         onRequestClose={closeModal}
-         contentLabel="Example Modal">
-          <AddWorkoutView add={addWorkout}/>
-        </Modal> */}

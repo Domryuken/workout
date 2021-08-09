@@ -28,7 +28,7 @@ export const addWorkout = async (model: WorkoutModel, setWorkouts: Dispatch<SetS
   };
 
   const data: WorkoutModel[] = await
-    fetch("http://localhost:5000/workouts/update", requestOptions)
+    fetch("http://localhost:5000/workouts/", requestOptions)
       .then(res => res.json())
       
   const dataWithDates = data.map( workout => {
@@ -48,7 +48,7 @@ export const deleteWorkout = async (model: WorkoutModel, setWorkouts: Dispatch<S
   const requestOptions = {method: 'DELETE'};
 
   const data: WorkoutModel[] = await
-    fetch(`http://localhost:5000/workouts/delete/${model._id}`, requestOptions)
+    fetch(`http://localhost:5000/workouts/${model.username}/${model._id}`, requestOptions)
       .then(res => res.json())
 
   const dataWithDates = data.map( workout => {
@@ -60,5 +60,6 @@ export const deleteWorkout = async (model: WorkoutModel, setWorkouts: Dispatch<S
       endTime:  new Date(workout.endTime)
     }
   })
+  console.log(dataWithDates)
   setWorkouts(dataWithDates)
 }
