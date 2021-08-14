@@ -1,48 +1,67 @@
 import React from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { Control, UseFormRegisterReturn } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { FormValues } from "../../controllers/AddWorkoutController"
+import Input from "@material-ui/core/Input";
+import TextField from '@material-ui/core/TextField';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
 
 interface Props {
-  date: UseFormRegisterReturn,
-  start: UseFormRegisterReturn,
-  end: UseFormRegisterReturn
+  control: Control<FormValues>,
 }
 
-export const AddWorkoutView: React.FC<Props> = (registers) => {
+export const AddWorkoutView: React.FC<Props> = ({control}) => {
 
   return (
-    <div >
-      <h1>Add workout</h1>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
-        <div className={"workout-box-inner"}>
-          
-          <div>
-            <h2>Date:</h2>
-            <div>
-              <label htmlFor="date">date</label>
-              <input type="date" {...registers.date} id="date"/>
-            </div>
+      <div >
+        <h1>Add workout</h1>
+          <div className={"workout-box-inner"}>
+
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => 
+                <KeyboardDatePicker
+                  {...field}
+                  label="Date"
+                  variant="inline"
+                />
+              }
+            />
+
+            <Controller
+              name="time"
+              control={control}
+              render={({ field }) =>
+                <KeyboardTimePicker
+                  {...field}
+                  label="Start time"
+                  variant="inline"
+                />
+              }
+            />
+
+            <Controller
+              name="duration"
+              control={control}
+              render={({ field }) =>
+                <TextField
+                  {...field}
+                  label="Duration"
+                  type="number"
+                />
+              }
+            />
+            
+            <input type="submit"/>
+            
           </div>
+      </div>
+    </MuiPickersUtilsProvider> 
 
-          <div>
-            <h2>Start time:</h2>
-            <div>
-              <label htmlFor="start">time</label>
-              <input type="time" {...registers.start} id="start"/>
-            </div>
-          </div>
-
-          <div>
-            <h2>End time:</h2>
-            <div>
-              <label htmlFor="end">endTime</label>
-              <input type="time" {...registers.end} id="end"/>
-            </div>
-          </div>
-
-          <input type="submit"/>
-          
-        </div>
-    </div>
   )
 }
 

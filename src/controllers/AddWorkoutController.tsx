@@ -10,44 +10,40 @@ interface Props {
 
 export interface FormValues {
   date: Date,
-  start: string,
-  end: string
+  time: Date,
+  duration: Date
 }
 
 const AddWorkoutController: React.FC<Props> = ({setWorkouts}) => {
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors }
+    control,
+    handleSubmit
   } = useForm<FormValues>();
 
-  const dateRegister = {...register("date", {required: true, valueAsDate: true})}
-  const constructAndAddWorkout: (model: FormValues) => void = ({date, start, end}) => {
-      
+  const constructAndAddWorkout: (model: FormValues) => void = ({date, time, duration}) => {
+    
     const justDate = date.toISOString().split("T")[0]
-    const startTime = new Date(`${justDate}T${start}:00`)
-    const endTime = new Date(`${justDate}T${end}:00`)
+    const justTime = time.toISOString().split("T")[1]
+    const justDuration = duration.toISOString().split("T")[1]
+
+    const startDateTime = new Date(`${justDate}T${justTime}`)
+    const endDateTime = new Date(`${justDate}T${justDuration}`)
 
     const workout: WorkoutModel = {
       username: "domryuken",
-      startTime: startTime,
-      endTime: endTime,
+      startTime: startDateTime,
+      endTime: endDateTime,
       exercises: []
     }
 
     addWorkout(workout, setWorkouts)
   }
 
-
   return (
     <div className="App">
       <form onSubmit={handleSubmit(constructAndAddWorkout)}>
-        <AddWorkoutView 
-          date={register("date", {required: true, valueAsDate: true})}
-          start={register("start", {required: true})}
-          end={register("end", {required: true})}
-        />
+        <AddWorkoutView control={control}/>
       </form>
     </div>
   );
