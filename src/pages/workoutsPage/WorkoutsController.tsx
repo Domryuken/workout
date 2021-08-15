@@ -1,8 +1,7 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {WorkoutsView} from "../views/workoutsPage/WorkoutsView"
-import WorkoutModel  from "../models/WorkoutModel"
-import { deleteWorkout } from '../Connector';
-import AddWorkoutController from './AddWorkoutController';
+import {WorkoutsView} from "./WorkoutsView"
+import WorkoutModel  from "../../models/WorkoutModel"
+import { deleteWorkout } from '../../Connector';
 
 interface Props {
   workouts: WorkoutModel[],
@@ -16,10 +15,7 @@ export const WorkoutsController: React.FC<Props> = ({workouts, setWorkouts}) => 
   }
 
   return (
-    <div>
-      <AddWorkoutController setWorkouts={setWorkouts}/>
-      <WorkoutsView workouts={workouts} deleteWorkoutMongo={partialDelete} />
-    </div>
+    <WorkoutsView workouts={workouts} deleteWorkoutMongo={partialDelete} />
   );
 }
 

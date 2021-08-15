@@ -13,7 +13,7 @@ export const getWorkouts = async (setWorkouts: Dispatch<SetStateAction<WorkoutMo
       username: workout.username,
       exercises: workout.exercises,
       startTime: new Date(workout.startTime),
-      endTime:  new Date(workout.endTime)
+      duration: workout.duration
     }
   })
   setWorkouts(dataWithDates)
@@ -37,7 +37,7 @@ export const addWorkout = async (model: WorkoutModel, setWorkouts: Dispatch<SetS
       username: workout.username,
       exercises: workout.exercises,
       startTime: new Date(workout.startTime),
-      endTime:  new Date(workout.endTime)
+      duration: workout.duration
     }
   })
   setWorkouts(dataWithDates)
@@ -57,9 +57,8 @@ export const deleteWorkout = async (model: WorkoutModel, setWorkouts: Dispatch<S
       username: workout.username,
       exercises: workout.exercises,
       startTime: new Date(workout.startTime),
-      endTime:  new Date(workout.endTime)
+      duration: workout.duration
     }
   })
-  console.log(dataWithDates)
   setWorkouts(dataWithDates)
 }

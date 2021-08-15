@@ -1,9 +1,9 @@
-import ExerciseModel from "./ExerciseModel"
+import ExerciseDataModel from "./ExerciseModel"
 
 export default interface WorkoutModel {
   readonly _id?: string,
   readonly username: string,
-  readonly exercises: ExerciseModel[],
+  readonly exercises: ExerciseDataModel[],
   readonly startTime: Date,
-  readonly endTime: Date
+  readonly duration: number
 }

@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import WorkoutsController from "./controllers/WorkoutsController"
-import AddWorkoutController from "./controllers/AddWorkoutController"
+import {useEffect, useState} from 'react';
+import WorkoutsController from "./pages/workoutsPage/WorkoutsController"
+import AddWorkoutFormLogic from "./forms/addWorkoutForm/AddWorkoutFormLogic"
 import {Route} from "react-router-dom"
 import WorkoutModel from './models/WorkoutModel';
-import { addWorkout, getWorkouts } from "./Connector"
+import { getWorkouts } from "./Connector"
+import AddExerciseFormLogic from './forms/addExerciseForm/AddExerciseFormLogic';
+
 
 function App() {
 
@@ -14,11 +16,10 @@ function App() {
   }
   
   useEffect(refreshWorkouts, [])
-  
+
   return (
     <div className="App">
       <Route exact path="/"><WorkoutsController workouts={workouts} setWorkouts={setWorkouts}/></Route>
-      <Route exact path="/add-workout"><AddWorkoutController setWorkouts={setWorkouts}/></Route>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import SetModel from "../../models/SetModel"
+import SetModel from "../models/SetModel"
 
 export const Set: React.FC<SetModel> = ({
   weight,
