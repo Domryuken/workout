@@ -1,51 +1,39 @@
-import React, { FormEventHandler } from "react";
-import { Control, Controller } from "react-hook-form";
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+
+import AddExerciseFormView, { FormValues } from "./AddExerciseFormView"
 import { useForm } from "react-hook-form";
+import { Dispatch, SetStateAction } from "react";
+import WorkoutModel from "../../models/WorkoutModel";
+import { addWorkout } from "../../Connector";
 
 interface Props {
-  onSubmit: (model: FormValues) => void
+  workout: WorkoutModel,
+  setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>
 }
 
-export interface FormValues {
-  exercise: string
-}
+const AddExerciseForm: React.FC<Props> = ({workout, setWorkouts}) => {
 
-export const AddExerciseForm: React.FC<Props> = ({ onSubmit }) => {
+  const {
+    control,
+    handleSubmit
+  } = useForm<FormValues>();
 
-  const {control, handleSubmit} = useForm<FormValues>();
+  const constructAndAddExercise: (formValues: FormValues) => void = ({exerciseName}) => {
+    const updatedWorkout: WorkoutModel = {
+      ...workout,
+      exercises: [
+        ...workout.exercises,
+        {name: exerciseName}
+      ]
+    }
+    addWorkout(updatedWorkout, setWorkouts)
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <h1>Add exercise</h1>
-        <div className={"exercise-box-inner"}>
-          <Controller
-            name="exercise"
-            control={control}
-            render={({ field }) => 
-              <FormControl>
-                <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-                  Exercise
-                </InputLabel>
-                <Select
-                  {...field}
-                  onChange={() => {}}
-                  displayEmpty
-                >
-                  <MenuItem value={"Pushup"}>Pushup</MenuItem>
-                  <MenuItem value={"Pullup"}>Pullup</MenuItem>
-                  <MenuItem value={"Squat"}>Squat</MenuItem>
-                </Select>
-              </FormControl>
-            }
-          />
-        </div>
-      </MuiPickersUtilsProvider> 
-    </form>
-  )
+    <AddExerciseFormView
+      handleSubmit={handleSubmit(constructAndAddExercise)}
+      control={control}
+    />
+  );
 }
 
-export default AddExerciseForm
+export default AddExerciseForm;

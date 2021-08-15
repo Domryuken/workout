@@ -1,72 +1,43 @@
-import React, { FormEventHandler } from "react";
-import { Control, Controller, UseFormHandleSubmit } from "react-hook-form";
-import TextField from '@material-ui/core/TextField';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import React, {Dispatch, SetStateAction} from 'react';
+import WorkoutModel from "../../models/WorkoutModel"
+import AddWorkoutFormView from "./AddWorkoutFormView"
+import {addWorkout} from "../../Connector"
+import { FormValues } from './AddWorkoutFormView';
+import { useForm } from "react-hook-form";
 
 interface Props {
-  handleSubmit: FormEventHandler<HTMLFormElement>
-  control: Control<FormValues>,
+  setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>
 }
 
-export interface FormValues {
-  date: Date,
-  time: Date,
-  duration: number
-}
+const AddWorkoutForm: React.FC<Props> = ({setWorkouts}) => {
 
-export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => {
+  const {
+    control,
+    handleSubmit
+  } = useForm<FormValues>();
+
+  const constructAndAddWorkout: (formValues: FormValues) => void = ({date, time, duration}) => {
+    
+    const justDate = date.toISOString().split("T")[0]
+    const justTime = time.toISOString().split("T")[1]
+    const startDateTime = new Date(`${justDate}T${justTime}`)
+
+    const workout: WorkoutModel = {
+      username: "domryuken",
+      startTime: startDateTime,
+      duration: duration,
+      exercises: []
+    }
+
+    addWorkout(workout, setWorkouts)
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <div >
-          <h1>Add workout</h1>
-            <div className={"workout-box-inner"}>
-  
-              <Controller
-                name="date"
-                control={control}
-                render={({ field }) => 
-                  <KeyboardDatePicker
-                    {...field}
-                    label="Date"
-                    variant="inline"
-                  />
-                }
-              />
-  
-              <Controller
-                name="time"
-                control={control}
-                render={({ field }) =>
-                  <KeyboardTimePicker
-                    {...field}
-                    label="Start time"
-                    variant="inline"
-                  />
-                }
-              />
-  
-              <Controller
-                name="duration"
-                control={control}
-                render={({ field }) =>
-                  <TextField
-                    {...field}
-                    label="Duration"
-                    type="number"
-                  />
-                }
-              />
-              
-              <input type="submit"/>
-              
-            </div>
-        </div>
-      </MuiPickersUtilsProvider> 
-    </form>
-  )
+    <AddWorkoutFormView
+      handleSubmit={handleSubmit(constructAndAddWorkout)}
+      control={control}
+    />
+  );
 }
 
-export default AddWorkoutFormView
+export default AddWorkoutForm;

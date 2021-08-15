@@ -1,20 +1,23 @@
 import React from "react";
+import ExerciseModel from "../models/ExerciseModel";
 import ExerciseDataModel from "../models/ExerciseModel"
 import Set from "./Set"
 
-export const ExerciseMax: React.FC<ExerciseDataModel> = ({name, sets}) => {
+interface Props {
+  exercise: ExerciseModel,
+  idx: number
+}
 
-  const SetView = () => <div>{
-    sets
-      ? sets.map( (set) => <Set {...set}/>)
+export const Exercise: React.FC<Props> = ({exercise, idx}) => {
+
+  return (<div className="border">
+    <h3>{exercise.name}</h3>
+
+    {exercise.sets
+      ? exercise.sets.map( (set) => {<>
+        <Set {...set}/>
+      </>})
       : <p>No Sets</p>
-  }</div>
-   
-
-  return (
-    <div className={"exercise-box"}>
-      <h3>{name}</h3>
-      <SetView/>
-    </div>
-  )
+    }
+  </div>)
 }
