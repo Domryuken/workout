@@ -26,6 +26,7 @@ export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => 
             <Controller
               name="date"
               control={control}
+              defaultValue={new Date()}
               render={({ field }) => 
                 <KeyboardDatePicker
                   {...field}
@@ -38,6 +39,7 @@ export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => 
             <Controller
               name="time"
               control={control}
+              defaultValue={new Date()}
               render={({ field }) =>
                 <KeyboardTimePicker
                   {...field}
@@ -50,6 +52,7 @@ export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => 
             <Controller
               name="duration"
               control={control}
+              defaultValue={1}
               render={({ field }) =>
                 <TextField
                   {...field}

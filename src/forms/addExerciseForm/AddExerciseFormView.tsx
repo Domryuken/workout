@@ -18,6 +18,7 @@ export const AddExerciseFormView: React.FC<Props> = ({ handleSubmit, control }) 
       <h1>Add exercise</h1>
       <Controller
         name="exerciseName"
+        defaultValue={"Pushup"}
         control={control}
         render={({ field }) => 
           <Select

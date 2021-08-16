@@ -16,6 +16,7 @@ export const AddSetFormView: React.FC<Props> = ({ handleSubmit, control }) => {
       <Controller
         name="reps"
         control={control}
+        defaultValue={1}
         render={({ field }) => 
           <TextField
             {...field}
@@ -27,6 +28,7 @@ export const AddSetFormView: React.FC<Props> = ({ handleSubmit, control }) => {
       <Controller
         name="weight"
         control={control}
+        defaultValue={1}
         render={({ field }) => 
           <TextField
             {...field}
