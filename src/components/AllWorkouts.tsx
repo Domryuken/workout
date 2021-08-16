@@ -1,26 +1,20 @@
-import React, { Dispatch, SetStateAction } from "react";
-import WorkoutModel from "../models/WorkoutModel"
+import { useContext } from "react";
 import {Workout} from "./Workout"
-import {Link} from "react-router-dom"
 import AddWorkoutForm from "../forms/addWorkoutForm/AddWorkoutForm";
-import { setWeekWithOptions } from "date-fns/fp";
+import { WorkoutContext } from "../context/WorkoutContext";
 
-interface Props {
-  workouts: WorkoutModel[],
-  setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>
-  deleteWorkoutMongo: (model: WorkoutModel) => void
-}
+export const AllWorkouts = () => {
 
-export const AllWorkouts: React.FC<Props> = ({workouts, setWorkouts, deleteWorkoutMongo}) => {
+
+  const {workouts, setWorkouts} = useContext(WorkoutContext)
+
   return (<div className="border">
     <h1>Workouts</h1>
     <AddWorkoutForm setWorkouts={setWorkouts}/>
     <div className="border">
-     {workouts.map( (workout, idx) =>
+     {workouts.map( (workout) =>
         <Workout
           workout={workout}
-          idx={idx}
-          deleteWorkoutMongo={deleteWorkoutMongo}
           setWorkouts={setWorkouts}
         />
       )}

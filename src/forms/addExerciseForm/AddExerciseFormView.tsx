@@ -30,7 +30,7 @@ export const AddExerciseFormView: React.FC<Props> = ({ handleSubmit, control }) 
           </Select>
         }
       />
-      <input type="submit"/>
+      <input type="submit" value="Add exercise"/>
     </form>
   )
 }

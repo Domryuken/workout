@@ -1,16 +1,21 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import {Exercise} from "./Exercise"
 import WorkoutModel from "../models/WorkoutModel"
 import AddExerciseForm from "../forms/addExerciseForm/AddExerciseForm";
+import { deleteWorkout } from "../Connector";
+import { WorkoutContext } from "../context/WorkoutContext";
 
 interface Props {
   workout: WorkoutModel,
-  idx: number,
-  deleteWorkoutMongo: (workout: WorkoutModel) => void
   setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>
 }
 
-export const Workout: React.FC<Props> = ({workout, deleteWorkoutMongo, setWorkouts}) => {
+export const Workout: React.FC<Props> = ({workout}) => {
+
+  const {setWorkouts} = useContext(WorkoutContext)
+  const deleteWorkoutMongo = (model: WorkoutModel) => {
+    deleteWorkout(model, setWorkouts) 
+  }
 
   return (<div className="border">
     <p><strong>Date:</strong>{workout.startTime.toDateString()}</p>
@@ -18,11 +23,11 @@ export const Workout: React.FC<Props> = ({workout, deleteWorkoutMongo, setWorkou
     <p><strong>Duration: </strong> {workout.duration} minutes</p>
     <button onClick={() => deleteWorkoutMongo(workout)}>DELETE</button>
 
-    <AddExerciseForm workout={workout} setWorkouts={setWorkouts}/>
+    <AddExerciseForm workout={workout} /> 
   
     <div className="border">
-      {workout.exercises.map( (exercise, idx) =>
-        <Exercise exercise={exercise} idx={idx}/>
+      {workout.exercises.map( (exercise, idx) => //TODO maybe do this differently somehow
+        <Exercise workout={workout} idx={idx}/>
       )}
     </div>
   </div>)

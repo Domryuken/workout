@@ -3,7 +3,10 @@ import SetModel from "../models/SetModel"
 
 export const Set: React.FC<SetModel> = ({weight, reps}) => {
   return (
-    <p>{weight} x {reps}</p>
+    <div className="border">
+      <p>Reps: {reps}</p>
+      <p>Weight: {weight}</p>
+    </div>
   )
 }
 

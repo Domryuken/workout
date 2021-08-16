@@ -59,7 +59,7 @@ export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => 
               }
             />
                 
-            <input type="submit"/>
+            <input type="submit" value="Add workout"/>
                 
         </MuiPickersUtilsProvider> 
       </form>

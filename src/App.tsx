@@ -1,21 +1,22 @@
 import {useEffect, useState} from 'react';
-import WorkoutsController from "./pages/WorkoutsController"
 import WorkoutModel from './models/WorkoutModel';
 import { getWorkouts } from "./Connector"
+import { WorkoutContext } from './context/WorkoutContext';
+import AllWorkouts from './components/AllWorkouts';
 
 
 function App() {
 
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([]);
 
-  const refreshWorkouts = () => {
+  useEffect(() => {
     getWorkouts(setWorkouts)
-  }
-  
-  useEffect(refreshWorkouts, [])
+  }, [])
 
   return (
-    <WorkoutsController workouts={workouts} setWorkouts={setWorkouts}/>
+    <WorkoutContext.Provider value={{workouts, setWorkouts}}>
+      <AllWorkouts />
+    </WorkoutContext.Provider>
   );
 }
 
