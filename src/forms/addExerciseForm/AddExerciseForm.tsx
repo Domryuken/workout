@@ -16,6 +16,7 @@ const AddExerciseForm: React.FC<Props> = ({workout}) => {
   const {control, handleSubmit} = useForm<FormValues>();
 
   const constructAndAddExercise: (formValues: FormValues) => void = ({exerciseName}) => {
+
     const updatedWorkout: WorkoutModel = {
       ...workout,
       exercises: [
@@ -26,6 +27,7 @@ const AddExerciseForm: React.FC<Props> = ({workout}) => {
         }
       ]
     }
+
     addWorkout(updatedWorkout, setWorkouts)
   }
 

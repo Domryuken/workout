@@ -29,8 +29,6 @@ const AddExerciseForm: React.FC<Props> = ({workout, idx}) => {
       reps: reps,
       weight: weight
     }
-    console.log("new set")
-    console.log(JSON.stringify(newSet))
 
     const updatedExercise: ExerciseModel = {
       ...workout.exercises[idx],
@@ -39,8 +37,6 @@ const AddExerciseForm: React.FC<Props> = ({workout, idx}) => {
         newSet
       ]
     }
-    console.log("updated exercise")
-    console.log(JSON.stringify(updatedExercise))
 
     const updatedWorkout: WorkoutModel = {
       ...workout,
@@ -50,8 +46,6 @@ const AddExerciseForm: React.FC<Props> = ({workout, idx}) => {
         ...workout.exercises.slice(idx+1)
       ]
     }
-    console.log("updated workout")
-    console.log(JSON.stringify(updatedWorkout))
 
     addWorkout(updatedWorkout, setWorkouts)
   }
