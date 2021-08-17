@@ -1,14 +1,11 @@
 import React, { FormEventHandler } from "react";
 import { Control, Controller } from "react-hook-form";
 import { Select, MenuItem } from "@material-ui/core";
+import { FormValues } from "./AddExerciseForm";
 
 interface Props {
   handleSubmit: FormEventHandler<HTMLFormElement>
   control: Control<FormValues>
-}
-
-export interface FormValues {
-  exerciseName: string
 }
 
 export const AddExerciseFormView: React.FC<Props> = ({ handleSubmit, control }) => {

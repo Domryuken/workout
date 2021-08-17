@@ -5,7 +5,6 @@ import { WorkoutContext } from "../context/WorkoutContext";
 
 export const AllWorkouts = () => {
 
-
   const {workouts, setWorkouts} = useContext(WorkoutContext)
 
   return (<div className="border">

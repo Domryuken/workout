@@ -16,23 +16,10 @@ export const Exercise: React.FC<Props> = ({workout, exerciseID}) => {
 
   const {setWorkouts} = useContext(WorkoutContext)
 
-  const deleteExerciseMongo = (workout: WorkoutModel) => {
-
-    const updatedWorkout: WorkoutModel = {
-      ...workout,
-      exercises: [
-        ...workout.exercises.slice(0, exerciseID),
-        ...workout.exercises.slice(exerciseID+1)
-      ]
-    }
-
-    addWorkout(updatedWorkout, setWorkouts)
-  }
-
   return (<div className="border">
     <h3>{workout.exercises[exerciseID].name}</h3>
 
-    <button onClick={() => deleteExerciseMongo(workout)}>DELETE EXERCISE</button>
+    <button onClick={() => deleteExerciseService(workout)}>DELETE EXERCISE</button>
 
     <AddSetForm workout={workout} idx={exerciseID}/>
 
@@ -42,4 +29,8 @@ export const Exercise: React.FC<Props> = ({workout, exerciseID}) => {
       )}
     </div>
   </div>)
+}
+
+function deleteExerciseService(workout: WorkoutModel): void {
+  throw new Error("Function not implemented.");
 }

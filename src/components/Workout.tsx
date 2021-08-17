@@ -2,8 +2,8 @@ import React, { Dispatch, SetStateAction, useContext } from "react";
 import {Exercise} from "./Exercise"
 import WorkoutModel from "../models/WorkoutModel"
 import AddExerciseForm from "../forms/addExerciseForm/AddExerciseForm";
-import { deleteWorkout } from "../Connector";
 import { WorkoutContext } from "../context/WorkoutContext";
+import { deleteWorkoutService } from "../UpdateMongoService";
 
 interface Props {
   workout: WorkoutModel,
@@ -13,16 +13,13 @@ interface Props {
 export const Workout: React.FC<Props> = ({workout}) => {
 
   const {setWorkouts} = useContext(WorkoutContext)
-  const deleteWorkoutMongo = (model: WorkoutModel) => {
-    deleteWorkout(model, setWorkouts) 
-  }
 
   return (<div className="border">
     <p><strong>Date:</strong>{workout.startTime.toDateString()}</p>
     <p><strong>Start time:</strong> {workout.startTime.toLocaleTimeString()}</p>
     <p><strong>Duration: </strong> {workout.duration} minutes</p>
 
-    <button onClick={() => deleteWorkoutMongo(workout)}>DELETE</button>
+    <button onClick={() => deleteWorkoutService(workout, setWorkouts)}>DELETE WORKOUT</button>
 
     <AddExerciseForm workout={workout} /> 
   

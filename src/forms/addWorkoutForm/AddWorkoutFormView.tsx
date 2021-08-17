@@ -1,18 +1,13 @@
 import React, { FormEventHandler } from "react";
-import { Control, Controller, UseFormHandleSubmit } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import TextField from '@material-ui/core/TextField';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { FormValues } from "./AddWorkoutForm";
 
 interface Props {
   handleSubmit: FormEventHandler<HTMLFormElement>
   control: Control<FormValues>,
-}
-
-export interface FormValues {
-  date: Date,
-  time: Date,
-  duration: number
 }
 
 export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => {
