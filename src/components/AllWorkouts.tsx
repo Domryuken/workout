@@ -7,18 +7,16 @@ export const AllWorkouts = () => {
 
   const {workouts, setWorkouts} = useContext(WorkoutContext)
 
-  return (<div className="border">
+  return (<>
     <h1>Workouts</h1>
     <AddWorkoutForm setWorkouts={setWorkouts}/>
-    <div className="border">
-     {workouts.map( (workout) =>
-        <Workout
-          workout={workout}
-          setWorkouts={setWorkouts}
-        />
-      )}
-    </div>
-  </div>)
+    {workouts.map( (workout) =>
+      <Workout
+        workout={workout}
+        setWorkouts={setWorkouts}
+      />
+    )}
+  </>)
 }
 
 export default AllWorkouts

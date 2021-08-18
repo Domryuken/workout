@@ -11,7 +11,7 @@ interface Props {
 export const AddSetFormView: React.FC<Props> = ({ handleSubmit, control }) => {
 
   return (
-    <form onSubmit={handleSubmit} className="border">
+    <form onSubmit={handleSubmit} >
       <h1>Add Set</h1>
       <Controller
         name="reps"

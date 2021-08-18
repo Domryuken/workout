@@ -29,6 +29,7 @@ export function deleteWorkoutService(
   model: WorkoutModel,
   setWorkouts: Dispatch<SetStateAction<WorkoutModel[]>>
 ){
+  console.log(JSON.stringify(model))
   deleteWorkout(model, setWorkouts) 
 }
   

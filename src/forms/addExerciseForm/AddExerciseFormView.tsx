@@ -11,7 +11,7 @@ interface Props {
 export const AddExerciseFormView: React.FC<Props> = ({ handleSubmit, control }) => {
 
   return (
-    <form onSubmit={handleSubmit} className="border">
+    <form onSubmit={handleSubmit} >
       <h1>Add exercise</h1>
       <Controller
         name="exerciseName"

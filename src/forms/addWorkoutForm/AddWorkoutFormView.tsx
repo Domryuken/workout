@@ -13,55 +13,53 @@ interface Props {
 export const AddWorkoutFormView: React.FC<Props> = ({handleSubmit, control}) => {
 
   return (
-    <div className="border">
-      <form onSubmit={handleSubmit}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <h1>Add workout</h1>
+    <form onSubmit={handleSubmit}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <h1>Add workout</h1>
 
-            <Controller
-              name="date"
-              control={control}
-              defaultValue={new Date()}
-              render={({ field }) => 
-                <KeyboardDatePicker
-                  {...field}
-                  label="Date"
-                  variant="inline"
-                />
-              }
-            />
+          <Controller
+            name="date"
+            control={control}
+            defaultValue={new Date()}
+            render={({ field }) => 
+              <KeyboardDatePicker
+                {...field}
+                label="Date"
+                variant="inline"
+              />
+            }
+          />
 
-            <Controller
-              name="time"
-              control={control}
-              defaultValue={new Date()}
-              render={({ field }) =>
-                <KeyboardTimePicker
-                  {...field}
-                  label="Start time"
-                  variant="inline"
-                />
-              }
-            />
+          <Controller
+            name="time"
+            control={control}
+            defaultValue={new Date()}
+            render={({ field }) =>
+              <KeyboardTimePicker
+                {...field}
+                label="Start time"
+                variant="inline"
+              />
+            }
+          />
 
-            <Controller
-              name="duration"
-              control={control}
-              defaultValue={1}
-              render={({ field }) =>
-                <TextField
-                  {...field}
-                  label="Duration"
-                  type="number"
-                />
-              }
-            />
-                
-            <input type="submit" value="Add workout"/>
-                
-        </MuiPickersUtilsProvider> 
-      </form>
-    </div>
+          <Controller
+            name="duration"
+            control={control}
+            defaultValue={1}
+            render={({ field }) =>
+              <TextField
+                {...field}
+                label="Duration"
+                type="number"
+              />
+            }
+          />
+              
+          <input type="submit" value="Add workout"/>
+              
+      </MuiPickersUtilsProvider> 
+    </form>
   )
 }
 
