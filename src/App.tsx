@@ -3,7 +3,19 @@ import WorkoutModel from './models/WorkoutModel';
 import { getWorkouts } from "./Connector"
 import { WorkoutContext } from './context/WorkoutContext';
 import AllWorkouts from './components/AllWorkouts';
+import { createTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff5252"
+    },
+    secondary: {
+      main: "#1de9b6"
+    }
+  }
+})
 
 function App() {
 
@@ -14,9 +26,11 @@ function App() {
   }, [])
 
   return (
-    <WorkoutContext.Provider value={{workouts, setWorkouts}}>
-      <AllWorkouts />
-    </WorkoutContext.Provider>
+    <ThemeProvider theme={theme}>
+      <WorkoutContext.Provider value={{workouts, setWorkouts}}>
+        <AllWorkouts />
+      </WorkoutContext.Provider>
+    </ThemeProvider>
   );
 }
 

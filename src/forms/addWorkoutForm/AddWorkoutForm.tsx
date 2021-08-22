@@ -17,6 +17,18 @@ interface Props {
 const AddWorkoutForm: React.FC<Props> = ({setWorkouts}) => {
 
   const {control, handleSubmit} = useForm<FormValues>();
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "add-workout" : undefined;
 
   const onSubmit: (formValues: FormValues) => void = ({date, time, duration}) => {
     addNewWorkoutService(date, time, duration, setWorkouts)
@@ -24,8 +36,13 @@ const AddWorkoutForm: React.FC<Props> = ({setWorkouts}) => {
 
   return (
     <AddWorkoutFormView
-      handleSubmit={handleSubmit(onSubmit)}
       control={control}
+      id={id}
+      open={open}
+      anchorEl={anchorEl}
+      handleSubmit={handleSubmit(onSubmit)}
+      handleClose={handleClose}
+      handleOpen={handleOpen}
     />
   );
 }

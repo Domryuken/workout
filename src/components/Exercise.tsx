@@ -5,10 +5,8 @@ import WorkoutModel from "../models/WorkoutModel";
 import { deleteExerciseService } from "../UpdateMongoService";
 import Set from "./Set"
 import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import Divider from '@material-ui/core/Divider';
+import { Button, AccordionSummary, AccordionDetails, Divider, Grid } from '@material-ui/core';
+import {Delete} from '@material-ui/icons';
 
 interface Props {
   workout: WorkoutModel,
@@ -21,29 +19,39 @@ export const Exercise: React.FC<Props> = ({workout, exerciseID}) => {
   const thisExercise = workout.exercises[exerciseID]
 
   return (
-
-    <Accordion className="flex-col-reverse">
+    <Accordion >
 
       <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-        <h3>{workout.exercises[exerciseID].name}</h3>
+        <Grid container spacing={1} wrap="nowrap" >
+          <Grid item>
+            <h3>{workout.exercises[exerciseID].name}</h3>
+          </Grid>
+          <Grid>
+            <Button variant="contained" size="small" color="secondary" aria-label="remove" type="submit"
+              onClick={() => deleteExerciseService(workout, exerciseID, setWorkouts)}>
+              <Delete/>
+            </Button> 
+          </Grid>
+        </Grid>
       </AccordionSummary>
-
+      
       <Divider />
-
-      <AccordionDetails className="flex-col">
-        <AddSetForm workout={workout} idx={exerciseID}/>
-        <div className="flex-col">
+      
+      <AccordionDetails >
+        
+        <Grid container spacing={1} wrap="nowrap" direction="column">
+          <Grid item>
+            <AddSetForm workout={workout} idx={exerciseID}/>
+          </Grid>
           {thisExercise.sets.map( (set, setID) =>
-            <Set exerciseID={exerciseID} setID={setID} workout={workout}/>
+            <Grid item>
+              <Set exerciseID={exerciseID} setID={setID} workout={workout}/>
+            </Grid>
           )}
-       </div> 
+        </Grid>
       </AccordionDetails>
 
       <Divider />
-
-      <AccordionActions>
-        <button onClick={() => deleteExerciseService(workout, exerciseID, setWorkouts)}>DELETE EXERCISE</button>
-      </AccordionActions>
 
     </Accordion>
   )

@@ -5,10 +5,9 @@ import AddExerciseForm from "../forms/addExerciseForm/AddExerciseForm";
 import { WorkoutContext } from "../context/WorkoutContext";
 import { deleteWorkoutService } from "../UpdateMongoService";
 import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import Divider from '@material-ui/core/Divider';
+import {AccordionSummary, AccordionDetails, AccordionActions, Divider, Paper, Grid, Button } from '@material-ui/core';
+import {Delete} from '@material-ui/icons';
+import Box from '@material-ui/core/Box';
 
 interface Props {
   workout: WorkoutModel,
@@ -20,33 +19,36 @@ export const Workout: React.FC<Props> = ({workout}) => {
   const {setWorkouts} = useContext(WorkoutContext)
 
   return (
-    <Accordion>
-
+    <Accordion >
       <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-        <div className="flex">
-          <p><strong>Date:</strong>{workout.startTime.toDateString()}</p>
-          <p><strong>Start time:</strong> {workout.startTime.toLocaleTimeString()}</p>
-          <p><strong>Duration: </strong> {workout.duration} minutes</p>
-        </div>
+        <Grid container spacing={1} wrap="nowrap" direction="column" >
+          <Grid item><strong>Date:</strong>{workout.startTime.toDateString()}</Grid>
+          <Grid item><strong>Start time:</strong> {workout.startTime.toLocaleTimeString()}</Grid>
+          <Grid item><strong>Duration: </strong> {workout.duration} minutes</Grid>
+          <Grid item>
+            <Button size="small" variant="contained" color="secondary" aria-label="remove" type="submit"
+              onClick={() => deleteWorkoutService(workout, setWorkouts)}
+            >
+              <Delete/>
+            </Button> 
+          </Grid>
+        </Grid>
       </AccordionSummary>
-      
+        
       <Divider />
 
-      <AccordionDetails className="flex-col">
-        <AddExerciseForm workout={workout} /> 
-        <div className="flex-col">
+      <AccordionDetails >
+        <Grid container spacing={1} wrap="nowrap" direction="column">
+          <Grid item>
+            <AddExerciseForm workout={workout} /> 
+          </Grid>
           {workout.exercises.map( (exercise, exerciseID) => //TODO maybe do this differently somehow
-            <Exercise workout={workout} exerciseID={exerciseID}/>
+            <Grid item>
+              <Exercise workout={workout} exerciseID={exerciseID}/>
+            </Grid>
           )}
-        </div>
+        </Grid>
       </AccordionDetails>
-
-      <Divider />
-
-      <AccordionActions>
-        <button onClick={() => deleteWorkoutService(workout, setWorkouts)}>DELETE WORKOUT</button>
-      </AccordionActions>
-
     </Accordion>
   )
 }

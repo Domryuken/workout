@@ -1,13 +1,9 @@
 import React, { useContext } from "react";
-import { addWorkout } from "../Connector";
 import { WorkoutContext } from "../context/WorkoutContext";
-import ExerciseModel from "../models/ExerciseModel";
-import SetModel from "../models/SetModel"
 import WorkoutModel from "../models/WorkoutModel";
 import { deleteSetService} from "../UpdateMongoService";
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { Button, Grid, Container } from '@material-ui/core';
+import {Delete} from '@material-ui/icons';
 
 interface Props {
   exerciseID: number,
@@ -22,13 +18,19 @@ export const Set: React.FC<Props> = ({exerciseID, setID, workout}) => {
   const {reps, weight} = workout.exercises[exerciseID].sets[setID]
 
   return (
-    <div className="flex"> 
-      <div>
-        <p>Reps: {reps}</p>
-        <p>Weight: {weight}</p>
-      </div>
-    <button onClick={() => deleteSetService(workout, exerciseID, setID, setWorkouts)}>DELETE SET</button>
-    </div>
+    <Container >
+      <Grid container spacing={1} wrap="nowrap" >
+        <Grid item>Reps: {reps}</Grid>
+        <Grid item>Weight: {weight}</Grid>
+        <Grid item>
+          <Button size="small" variant="contained" color="secondary" aria-label="remove" type="submit"
+            onClick={() => deleteSetService(workout, exerciseID, setID, setWorkouts)}>
+            <Delete/>
+          </Button> 
+        </Grid>
+      </Grid>
+    </Container>
+
   )
 }
 
