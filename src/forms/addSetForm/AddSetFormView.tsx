@@ -20,7 +20,7 @@ export const AddSetFormView: React.FC<Props> = (props) => {
   return (<>
 
     <Button variant="contained" aria-describedby={props.id} size="medium" color="primary" aria-label="add" onClick={props.handleOpen}>
-      Add Workout
+      Add Set
       <AddIcon />
     </Button> 
 

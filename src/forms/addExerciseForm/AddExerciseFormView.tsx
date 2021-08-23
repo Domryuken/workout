@@ -19,7 +19,7 @@ export const AddExerciseFormView: React.FC<Props> = (props) => {
 
   return (<>
     <Button aria-describedby={props.id} variant="contained" size="medium" color="primary" aria-label="add" onClick={props.handleOpen}>
-      Add Workout
+      Add Exercise 
       <AddIcon />
     </Button> 
 
@@ -53,7 +53,7 @@ export const AddExerciseFormView: React.FC<Props> = (props) => {
               />
             </Grid >
             <Grid item>
-              <Button variant="contained" size="small" color="primary" aria-label="add" type="submit" >
+              <Button variant="contained" size="small" color="primary" aria-label="add" type="submit" onClick={event => event.stopPropagation()}>
                 <AddIcon />
               </Button> 
             </Grid>
